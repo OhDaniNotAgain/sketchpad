@@ -52,8 +52,8 @@ button:hover {
 }
 
 .grid-cell {
-  flex: 0 0 calc(100% / 16);
-  height: calc(100% / 16);
+  flex-grow: 0;
+  flex-shrink: 0;
   border: 1px solid rgba(0, 0, 0, 0.06);
   user-select: none;
 }
