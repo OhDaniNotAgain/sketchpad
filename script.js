@@ -14,9 +14,21 @@ for (let i = 0; i < totalCells; i++) {
  cell.style.flexBasis = cellSize;
  cell.style.height = cellSize;
 
- cell.addEventListener("mouseenter", () => {
- cell.classList.add("drawn");
- });
+ cell.addEventListener("mouseenter", (e) => {
+    const currentCell = e.currentTarget;
+
+    if (!currentCell.dataset.color) {
+      currentCell.dataset.color = getRandomRGB();
+      currentCell.style.backgroundColor = currentCell.dataset.color;
+    }
+
+    let steps = Number(currentCell.dataset.steps) || 0;
+    if (steps < 10) {
+      steps += 1;
+      currentCell.dataset.steps = steps;
+      currentCell.style.opacity = steps / 10;
+    }
+  });
 
  container.appendChild(cell); //La palabra corresta es append, no appened 
 }
@@ -41,6 +53,43 @@ resizeBtn.addEventListener("click", () => {
 
   createGrid(newSize);
 });
+
+
+
+//Hacia abajo son los eventos por corregir
+
+
+
+
+
+
+
+function getRandomRGB() {
+  const r = Math.floor(Math.random() * 256);
+  const g = Math.floor(Math.random() * 256);
+  const b = Math.floor(Math.random() * 256);
+  return `rgb(${r}, ${g}, ${b})`;
+}
+
+cell.addEventListener("mouseenter", (e) => {
+  const currentCell = e.currentTarget;
+
+  if (!currentCell.dataset.color) {
+    currentCell.dataset.color = getRandomRGB();
+    currentCell.style.backgroundColor = currentCell.dataset.color;
+  }
+
+  let steps = Number(currentCell.dataset.steps) || 0;
+  if (steps < 10) {
+    steps += 1;
+    currentCell.dataset.steps = steps;
+    currentCell.style.opacity = steps / 10;
+  }
+});
+
+
+
+
 
 
 // Crear la cuadrícula inicial de 16x16
